@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Live Scores Home Screen</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&amp;family=Open+Sans:wght@400;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background-dark": "#360F1A",
+                        "card-dark": "#4C1C29",
+                        "text-primary-dark": "#F5F5DC",
+                        "text-secondary-dark": "#D3B7B3",
+                        "border-dark": "#6B3A44",
+                        "primary": "#EBB62D",
+                        "leading": "#28A745",
+                        "losing": "#DC3545",
+                        "tied": "#92877E",
+                    },
+                    fontFamily: {
+                        "serif-display": ["Roboto Slab", "serif"],
+                        "sans-score": ["Open Sans", "sans-serif"],
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .logo-embroidered {
+            filter: grayscale(10%) contrast(110%) saturate(120%) brightness(95%);
+            mix-blend-mode: luminosity;
+        }
+
+        .card-magazine-shadow {
+            box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            min-height: max(884px, 100dvh);
+        }
+
+        /* Hide scrollbar for clean UI */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+    </style>
+</head>
+
+<body class="font-serif-display bg-background-dark selection:bg-primary selection:text-background-dark">
+    <div
+        class="relative flex min-h-screen w-full flex-col bg-background-dark text-text-primary-dark max-w-md mx-auto shadow-2xl border-x border-border-dark">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-10 flex h-16 items-center justify-between bg-background-dark/95 px-4 backdrop-blur-sm border-b border-border-dark/50">
+            <button id="refresh-btn"
+                class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-text-primary-dark hover:bg-white/5 transition-colors">
+                <span class="material-symbols-outlined text-2xl transition-transform duration-700">sync</span>
+            </button>
+            <h1 class="text-xl font-bold tracking-wide">Live Matches</h1>
+            <button
+                class="flex h-12 w-12 cursor-pointer items-center justify-center rounded-full text-text-primary-dark hover:bg-white/5 transition-colors">
+                <span class="material-symbols-outlined text-2xl">search</span>
+            </button>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="sticky top-16 z-10 bg-background-dark pb-3 pt-1">
+            <div class="flex border-b border-border-dark px-4" id="tabs-container">
+                <button
+                    class="tab-btn flex flex-1 flex-col items-center justify-center border-b-[3px] border-b-primary pb-[13px] pt-4 text-text-primary-dark transition-all"
+                    data-tab="all">
+                    <p class="text-sm font-bold">All</p>
+                </button>
+                <button
+                    class="tab-btn flex flex-1 flex-col items-center justify-center border-b-[3px] border-b-transparent pb-[13px] pt-4 text-text-secondary-dark hover:text-text-primary-dark transition-all"
+                    data-tab="premier-league">
+                    <p class="text-sm font-bold">Premier League</p>
+                </button>
+                <button
+                    class="tab-btn flex flex-1 flex-col items-center justify-center border-b-[3px] border-b-transparent pb-[13px] pt-4 text-text-secondary-dark hover:text-text-primary-dark transition-all"
+                    data-tab="la-liga">
+                    <p class="text-sm font-bold">La Liga</p>
+                </button>
+                <button
+                    class="tab-btn flex flex-1 flex-col items-center justify-center border-b-[3px] border-b-transparent pb-[13px] pt-4 text-text-secondary-dark hover:text-text-primary-dark transition-all"
+                    data-tab="serie-a">
+                    <p class="text-sm font-bold">Serie A</p>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="flex flex-col gap-4 p-4 min-h-[50vh]" id="matches-container">
+            <!-- Loading State -->
+            <div id="loading-indicator"
+                class="flex flex-col items-center justify-center py-10 text-text-secondary-dark">
+                <span class="material-symbols-outlined animate-spin text-4xl mb-2">sync</span>
+                <p>Loading live scores...</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
